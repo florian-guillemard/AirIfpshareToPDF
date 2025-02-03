@@ -1,0 +1,21 @@
+services:
+  web:
+    build: .
+    ports:
+      - '127.0.0.1:${HTTP_PORT}:5000'
+    restart: always
+    networks: 
+      - nginx_https_proxy
+    hostname: ${URL_SERVER}
+    environment:
+      - GENERIC_TIMEZONE=${GENERIC_TIMEZONE}
+      - TZ=${TZ}
+      - LETSENCRYPT_HOST=${URL_SERVER_ALL}
+      - LETSENCRYPT_EMAIL=${LETS_ENCRYPT_CONTACT}
+      - VIRTUAL_HOST=${URL_SERVER_ALL}
+      - VIRTUAL_PORT=${HTTP_PORT}
+      - FLASK_ENV=production
+
+networks:
+  nginx_https_proxy:
+    external: true
