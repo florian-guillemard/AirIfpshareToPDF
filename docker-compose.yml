@@ -2,6 +2,6 @@ services:
   web:
     build: .
     ports:
-      - "5020:5000"  # Expose le port 5000 pour accéder à l'application
+      - "5000:5000"
     environment:
       - FLASK_ENV=production
